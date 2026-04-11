@@ -5,7 +5,6 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "platforms": ["android"],
-    "sdkVersion": "52.0.0",
     "android": {
       "minSdkVersion": 28,
       "package": "com.lavarapido.vehicular"

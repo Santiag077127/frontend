@@ -1,27 +1,18 @@
-/**
- * AppNavigator.tsx
- * Patrón: Guard / Protected Routes por rol
- * RF1.5: Cierre de sesión | RNF7: Control de roles
- */
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store';
-// import AuthNavigator from './AuthNavigator';
-// import ClientNavigator from './ClientNavigator';
-// import OperatorNavigator from './OperatorNavigator';
+import { NavigationContainer } from '@react-navigation/native'
+import { useAppSelector } from '../store/hooks'
+import AuthNavigator from './AuthNavigator'
 
-const AppNavigator = () => {
-  const { user, token } = useSelector((state: RootState) => state.auth);
+export default function AppNavigator() {
+  const token = useAppSelector((s) => s.auth.token)
 
-  if (!token) {
-    return null; // <AuthNavigator />
-  }
-
-  switch ((user as any)?.role) {
-    case 'client':   return null; // <ClientNavigator />
-    case 'operator': return null; // <OperatorNavigator />
-    default:         return null; // <AuthNavigator />
-  }
-};
-
-export default AppNavigator;
+  return (
+    <NavigationContainer>
+      {token ? (
+        // Aquí irá ClientNavigator cuando lo construyas
+        <AuthNavigator />
+      ) : (
+        <AuthNavigator />
+      )}
+    </NavigationContainer>
+  )
+}

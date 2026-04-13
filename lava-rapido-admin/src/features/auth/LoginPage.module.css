@@ -1,0 +1,144 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #b7c3cf; /* gris claro */
+  padding: 20px;
+}
+
+.container {
+  display: flex;
+  width: 900px;
+  max-width: 100%;
+  background: #b7c3cf;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* IZQUIERDA */
+.left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* LOGO */
+.logo {
+  width: 220px;
+  border-radius: 20px;
+}
+
+/* DERECHA */
+.right {
+  flex: 1;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TÍTULO */
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #111;
+}
+
+/* INPUTS */
+.inputGroup {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.input {
+  width: 100%;
+  padding: 14px 16px 14px 42px;
+  border-radius: 10px;
+  border: none;
+  background: #d9d9d9; /* gris claro input */
+  color: #333;
+  font-size: 14px;
+}
+
+.input::placeholder {
+  color: #777;
+}
+
+.input:focus {
+  outline: none;
+}
+
+/* ERROR INPUT */
+.inputError {
+  border: 2px solid #ff4d4d;
+}
+
+/* ICONOS */
+.icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #555;
+}
+
+/* BOTÓN */
+.button {
+  margin-top: 10px;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  background: #0a0a8f; /* azul oscuro */
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.button:hover {
+  background: #1a1acb;
+}
+
+/* ERROR */
+.error {
+  color: #d32f2f;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+/* LINKS */
+.links {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.link {
+  text-align: center;
+  color: black;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.link:hover {
+  color: #0a0a8f;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .logo {
+    width: 150px;
+  }
+
+  .right {
+    padding: 30px 20px;
+  }
+}

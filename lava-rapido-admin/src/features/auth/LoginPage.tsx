@@ -77,11 +77,6 @@ export default function LoginPage() {
               {loading ? 'Ingresando...' : 'Iniciar Sesión'}
             </button>
           </form>
-
-          <div className={styles.links}>
-            <span className={styles.link}>Registrarse</span>
-            <span className={styles.link}>Recuperar contraseña</span>
-          </div>
         </div>
 
       </div>

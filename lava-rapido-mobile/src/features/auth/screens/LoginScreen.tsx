@@ -1,8 +1,14 @@
 import React from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
+
+
 
 export default function LoginScreen() {
+
+  const navigation = useNavigation<any>()
+  
   return (
     <View style={styles.container}>
 
@@ -37,7 +43,7 @@ export default function LoginScreen() {
       </TouchableOpacity>
 
       {/* Links */}
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Register')}>
         <Text style={styles.link}>Registrarse</Text>
       </TouchableOpacity>
 

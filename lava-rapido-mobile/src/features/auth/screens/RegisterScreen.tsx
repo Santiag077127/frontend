@@ -9,16 +9,23 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Image,
 } from 'react-native'
 
+import { useNavigation } from '@react-navigation/native'
+import { MaterialIcons, Feather, Ionicons } from '@expo/vector-icons'
+
 export default function RegisterScreen() {
-  const [nombre,     setNombre]     = useState('')
-  const [correo,     setCorreo]     = useState('')
-  const [telefono,   setTelefono]   = useState('')
+
+  const navigation = useNavigation<any>()
+
+  const [nombre, setNombre] = useState('')
+  const [correo, setCorreo] = useState('')
+  const [telefono, setTelefono] = useState('')
   const [contrasena, setContrasena] = useState('')
-  const [confirmar,  setConfirmar]  = useState('')
-  const [error,      setError]      = useState('')
-  const [loading,    setLoading]    = useState(false)
+  const [confirmar, setConfirmar] = useState('')
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const handleRegister = () => {
     setError('')
@@ -37,7 +44,6 @@ export default function RegisterScreen() {
     }
 
     setLoading(true)
-    // Aquí irá la llamada al backend cuando esté listo
     setTimeout(() => setLoading(false), 1500)
   }
 
@@ -50,83 +56,81 @@ export default function RegisterScreen() {
         contentContainerStyle={styles.page}
         keyboardShouldPersistTaps="handled"
       >
-        {/* Logo y título */}
-        <Text style={styles.logo}>🚗</Text>
-        <Text style={styles.title}>Crear cuenta</Text>
-        <Text style={styles.subtitle}>Completa el formulario para registrarte</Text>
 
-        {/* Formulario */}
+        {/* LOGO */}
+        <Image
+          source={require('../../../assets/logo.png')}
+          style={styles.logo}
+        />
+
+        {/* FORMULARIO */}
         <View style={styles.form}>
 
-          <View style={styles.field}>
-            <Text style={styles.label}>Nombre completo</Text>
+          {/* CORREO */}
+          <View style={styles.inputContainer}>
+            <MaterialIcons name="email" size={20} color="#444" />
             <TextInput
-              style={styles.input}
-              value={nombre}
-              onChangeText={setNombre}
-              placeholder="Tu nombre completo"
-              placeholderTextColor="#aaa"
-              autoCapitalize="words"
-            />
-          </View>
-
-          <View style={styles.field}>
-            <Text style={styles.label}>Correo electrónico</Text>
-            <TextInput
+              placeholder="Correo"
               style={styles.input}
               value={correo}
               onChangeText={setCorreo}
-              placeholder="correo@ejemplo.com"
-              placeholderTextColor="#aaa"
-              keyboardType="email-address"
-              autoCapitalize="none"
             />
           </View>
 
-          <View style={styles.field}>
-            <Text style={styles.label}>Teléfono</Text>
+          {/* TELÉFONO */}
+          <View style={styles.inputContainer}>
+            <Feather name="phone" size={20} color="#444" />
             <TextInput
+              placeholder="Teléfono"
               style={styles.input}
               value={telefono}
               onChangeText={setTelefono}
-              placeholder="3001234567"
-              placeholderTextColor="#aaa"
-              keyboardType="phone-pad"
             />
           </View>
 
-          <View style={styles.field}>
-            <Text style={styles.label}>Contraseña</Text>
+          {/* NOMBRE */}
+          <View style={styles.inputContainer}>
+            <Feather name="user" size={20} color="#444" />
             <TextInput
+              placeholder="Nombre"
+              style={styles.input}
+              value={nombre}
+              onChangeText={setNombre}
+            />
+          </View>
+
+          {/* CONTRASEÑA */}
+          <View style={styles.inputContainer}>
+            <Ionicons name="lock-closed" size={20} color="#444" />
+            <TextInput
+              placeholder="Contraseña"
+              secureTextEntry
               style={styles.input}
               value={contrasena}
               onChangeText={setContrasena}
-              placeholder="Mínimo 8 caracteres"
-              placeholderTextColor="#aaa"
-              secureTextEntry
             />
           </View>
 
-          <View style={styles.field}>
-            <Text style={styles.label}>Confirmar contraseña</Text>
+          {/* CONFIRMAR */}
+          <View style={styles.inputContainer}>
+            <Ionicons name="lock-closed" size={20} color="#444" />
             <TextInput
+              placeholder="Confirmar contraseña"
+              secureTextEntry
               style={styles.input}
               value={confirmar}
               onChangeText={setConfirmar}
-              placeholder="Repite tu contraseña"
-              placeholderTextColor="#aaa"
-              secureTextEntry
             />
           </View>
 
-          {/* Error */}
+          {/* ERROR */}
           {error ? (
             <View style={styles.errorBox}>
               <Text style={styles.errorText}>⚠ {error}</Text>
             </View>
           ) : null}
 
-          {/* Botón */}
+          {/* BOTÓN */}
           <TouchableOpacity
             style={[styles.button, loading && styles.buttonDisabled]}
             onPress={handleRegister}
@@ -134,17 +138,23 @@ export default function RegisterScreen() {
           >
             {loading
               ? <ActivityIndicator color="#fff" />
-              : <Text style={styles.buttonText}>Crear cuenta</Text>
+              : <Text style={styles.buttonText}>Registrar</Text>
             }
           </TouchableOpacity>
 
-        </View>
+          {/* LINKS */}
+          <Text
+            style={styles.link}
+            onPress={() => navigation.navigate('Login')}
+          >
+            Iniciar Sesión
+          </Text>
 
-        {/* Enlace al login */}
-        <Text style={styles.footer}>
-          ¿Ya tienes cuenta?{' '}
-          <Text style={styles.link}>Inicia sesión</Text>
-        </Text>
+          <Text style={styles.link}>
+            Recuperar contraseña
+          </Text>
+
+        </View>
 
       </ScrollView>
     </KeyboardAvoidingView>
@@ -154,50 +164,78 @@ export default function RegisterScreen() {
 const styles = StyleSheet.create({
   page: {
     flexGrow: 1,
-    backgroundColor: '#1F3864',
+    backgroundColor: '#BFD0DB',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 24,
-  },
-  logo:     { fontSize: 64, marginBottom: 8 },
-  title:    { fontSize: 28, fontWeight: '700', color: '#fff', marginBottom: 4 },
-  subtitle: { fontSize: 14, color: 'rgba(255,255,255,0.7)', marginBottom: 32 },
+    paddingVertical: 40,
+    minHeight: '100%',
+  },  
 
+  logo: {
+    width: 140,
+    height: 140,
+    borderRadius: 20,
+    marginBottom: 30,
+  },
+
+  /* 🔥 AQUÍ SE ARREGLA LO DE LOS BORDES */
   form: {
     width: '100%',
-    backgroundColor: '#fff',
-    borderRadius: 16,
-    padding: 24,
-    gap: 16,
+    paddingHorizontal: 25,
+    gap: 15,
+    maxWidth: 400, // 🔥 evita que se vea muy ancho en pantallas grandes
   },
-  field: { gap: 6 },
-  label: { fontSize: 13, fontWeight: '600', color: '#444' },
+
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#E5E5E5',
+    borderRadius: 15,
+    paddingHorizontal: 15,
+    height: 55,
+  },
+
   input: {
-    borderWidth: 1.5,
-    borderColor: '#ddd',
-    borderRadius: 8,
-    padding: 12,
-    fontSize: 14,
-    color: '#333',
+    marginLeft: 10,
+    flex: 1,
+    fontSize: 15,
+  },
+
+  button: {
+    backgroundColor: '#2A66B2',
+    height: 55,
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+
+  buttonDisabled: {
+    opacity: 0.7,
+  },
+
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: '600',
   },
 
   errorBox: {
     backgroundColor: '#FFF0F0',
-    borderRadius: 8,
+    borderRadius: 10,
     padding: 12,
   },
-  errorText: { color: '#c0392b', fontSize: 13 },
 
-  button: {
-    backgroundColor: '#1F3864',
-    borderRadius: 8,
-    padding: 14,
-    alignItems: 'center',
-    marginTop: 4,
+  errorText: {
+    color: '#c0392b',
+    fontSize: 13,
   },
-  buttonDisabled: { opacity: 0.7 },
-  buttonText:     { color: '#fff', fontSize: 15, fontWeight: '600' },
 
-  footer: { marginTop: 24, color: 'rgba(255,255,255,0.8)', fontSize: 14 },
-  link:   { color: '#fff', fontWeight: '700' },
+  link: {
+    textAlign: 'center',
+    marginTop: 10,
+    textDecorationLine: 'underline',
+    color: '#1E1E1E',
+    fontSize: 14,
+  },
 })

@@ -1,3 +1,10 @@
-import App from './src/App';
+import { NavigationContainer } from '@react-navigation/native'
+import AuthNavigator from './src/navigation/AuthNavigator'
 
-export default App;
+export default function App() {
+  return (
+    <NavigationContainer>
+      <AuthNavigator />
+    </NavigationContainer>
+  )
+}

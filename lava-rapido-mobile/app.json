@@ -4,10 +4,14 @@
     "slug": "lava-rapido-vehicular",
     "version": "1.0.0",
     "orientation": "portrait",
-    "platforms": ["android"],
+    "platforms": [
+      "android"
+    ],
     "android": {
-      "minSdkVersion": 28,
       "package": "com.lavarapido.vehicular"
-    }
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }

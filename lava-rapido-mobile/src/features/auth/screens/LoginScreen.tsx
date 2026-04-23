@@ -5,8 +5,8 @@ import { useNavigation } from '@react-navigation/native'
 
 
 
-export default function LoginScreen() {
-
+export default function LoginScreen({ setIsLoggedIn }: any) {
+  
   const navigation = useNavigation<any>()
   
   return (
@@ -38,9 +38,14 @@ export default function LoginScreen() {
       </View>
 
       {/* Botón */}
-      <TouchableOpacity style={styles.button}>
+ 
+      <TouchableOpacity 
+        style={styles.button}
+        onPress={() => setIsLoggedIn(true)}
+      >
         <Text style={styles.buttonText}>Iniciar Sesión</Text>
       </TouchableOpacity>
+  
 
       {/* Links */}
       <TouchableOpacity onPress={() => navigation.navigate('Register')}>

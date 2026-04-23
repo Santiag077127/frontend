@@ -1,10 +1,14 @@
-import { NavigationContainer } from '@react-navigation/native'
-import AuthNavigator from './AuthNavigator'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import TabNavigator from './TabNavigator'
+import ServiceDetailScreen from '../features/services/screens/ServiceDetailScreen'
+
+const Stack = createNativeStackNavigator()
 
 export default function AppNavigator() {
   return (
-    <NavigationContainer>
-      <AuthNavigator />
-    </NavigationContainer>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="MainTabs" component={TabNavigator} />
+      <Stack.Screen name="ServiceDetail" component={ServiceDetailScreen} />
+    </Stack.Navigator>
   )
 }
